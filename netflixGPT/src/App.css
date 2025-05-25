@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+:root {
+  --color-red-700: #b91c1c; /* Lighter red, Tailwind's red-500 */
+  --color-gray-800: #6b7280; /* Lighter gray, Tailwind's gray-500 */
+  --custom-gradient: linear-gradient(to bottom, #000000, transparent);
+}
