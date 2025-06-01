@@ -7,14 +7,13 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { PHOTOURL } from "./constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [isErrorMsg, setIsErrorMsg] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const email = useRef(null);
@@ -62,8 +61,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(auth.currentUser, {
             displayName: fullName.current.value,
-            photoURL:
-              "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png",
+            photoURL: {PHOTOURL}
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -75,7 +73,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
             })
             .catch((error) => {
               setIsErrorMsg(error.message);
@@ -98,7 +95,6 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
-          navigate("/browse");
           // ...
         })
         .catch((error) => {
